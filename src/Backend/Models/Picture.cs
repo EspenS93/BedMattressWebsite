@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 
 namespace BedMatressWebsite.Models
 {
-    public class Bed
+    public class Picture
     {
         public string ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Type { get; set; }
-        public string Series { get; set; }
-        public string Size { get; set; }
-        public string Color { get; set; }
-        public string Fabric { get; set; }
+        public string ContentType { get; set; }
+        public string FileName { get; set; }
+        public string File { get; set; }
+        public string BedID { get; set; }
+
 
     }
 }

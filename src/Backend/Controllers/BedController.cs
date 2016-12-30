@@ -21,16 +21,79 @@ namespace BedMatressWebsite.Controllers
 
         // GET: api/Bed
         [HttpGet]
-        public IEnumerable<Bed> Get()
+        public IEnumerable<Bed> GetBeds()
         {
             return BedMatressDB.Set<Bed>();
         }
 
-        // GET api/Bed/5
-        [HttpGet("{id}", Name = "GetBed")]
-        public IActionResult Get(int id)
+        // POST: api/Bed/filter
+        [HttpPost("filter")]
+        public IEnumerable<Bed> GetSpecificBeds([FromBody] Bed filter)
         {
-            var bed = BedMatressDB.Beds.Find(id);
+            IQueryable<Bed> beds = BedMatressDB.Set<Bed>();
+            if (filter.Color != "")
+            {
+                beds = beds.Where(b => b.Color == filter.Color);
+            }
+            if(filter.Fabric !="")
+            {
+                beds = beds.Where(b => b.Fabric == filter.Fabric);
+            }
+            if (filter.Type != "")
+            {
+                beds = beds.Where(b => b.Type == filter.Type);
+            }
+            if (filter.Size != "")
+            {
+                beds = beds.Where(b => b.Size == filter.Size);
+            }
+            if (filter.Series != "")
+            {
+                beds = beds.Where(b => b.Series == filter.Series);
+            }
+            return beds;
+        }
+
+        // GET: api/Bed/colors
+        [HttpGet, Route("colors")]
+        public IActionResult GetBedColors()
+        {
+            return new JsonResult(BedMatressDB.Beds.Select(b => b.Color).Distinct());
+        }
+
+        // GET: api/Bed/fabrics
+        [HttpGet, Route("fabrics")]
+        public IActionResult GetBedFabrics()
+        {
+            return new JsonResult(BedMatressDB.Beds.Select(b => b.Fabric).Distinct());
+        }
+
+        // GET: api/Bed/series
+        [HttpGet, Route("series")]
+        public IActionResult GetBedSeries()
+        {
+            return new JsonResult(BedMatressDB.Beds.Select(b => b.Series).Distinct());
+        }
+
+        // GET: api/Bed/sizes
+        [HttpGet, Route("sizes")]
+        public IActionResult GetBedSizes()
+        {
+            return new JsonResult(BedMatressDB.Beds.Select(b => b.Size).Distinct());
+        }
+
+        // GET: api/Bed/types
+        [HttpGet, Route("types")]
+        public IActionResult GetBedTypes()
+        {
+            return new JsonResult(BedMatressDB.Beds.Select(b => b.Type).Distinct());
+        }
+
+        // GET: api/Bed/id
+        [HttpGet("{id}", Name = "GetBed")]
+        public IActionResult GetBed(string id)
+        {
+            var bed = BedMatressDB.Set<Bed>().Find(id);
             if (bed == null)
             {
                 return NotFound();
@@ -38,9 +101,9 @@ namespace BedMatressWebsite.Controllers
             return new ObjectResult(bed);
         }
 
-        // POST api/Bed
+        // POST: api/Bed
         [HttpPost]
-        public IActionResult Post([FromBody]Bed bed)
+        public IActionResult PostBed([FromBody]Bed bed)
         {
             if (bed == null)
             {
@@ -51,9 +114,9 @@ namespace BedMatressWebsite.Controllers
             return CreatedAtRoute("GetBed", new { id = bed.ID }, bed);
         }
 
-        // PUT api/Bed/5
+        // PUT: api/Bed/id
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]Bed newBed)
+        public IActionResult PutBed(string id, [FromBody]Bed newBed)
         {
             if (newBed == null || newBed.ID != id)
             {
@@ -71,9 +134,9 @@ namespace BedMatressWebsite.Controllers
             return new NoContentResult();
         }
 
-        // DELETE api/Bed/5
+        // DELETE: api/Bed/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult DeleteBed(string id)
         {
             var bed = BedMatressDB.Set<Bed>().Find(id);
             if (bed == null)

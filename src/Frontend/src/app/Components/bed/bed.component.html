@@ -1,0 +1,32 @@
+<div *ngIf="bed">
+  <h2>{{bed.name}} details!</h2>
+  <div>
+    <div>
+      <label>Description: </label>
+      <label>{{bed.description}}</label>
+    </div>
+    <div>
+      <label>type: </label>
+      <label>{{bed.type}}</label>
+    </div>
+    <div>
+      <label>color: </label>
+      <label>{{bed.color}}</label>
+    </div>
+    <div>
+      <label>fabric: </label>
+      <label>{{bed.fabric}}</label>
+    </div>
+    <div>
+      <label>size: </label>
+      <label>{{bed.size}}</label>
+    </div>
+    <div>
+      <label>series: </label>
+      <label>{{bed.series}}</label>
+    </div>
+  </div>
+
+  <button (click)="goBack()">Back</button>
+  <button (click)="save()">Save</button>
+</div>
