@@ -1,0 +1,47 @@
+<div>
+  <div class="w3-container w3-green">
+    <h2>New Bed</h2>
+  </div>
+  <form class="w3-container">
+    <p>
+      <label>Name</label>
+      <input [(ngModel)]="newBed.name" name="name" class="w3-input" type="text" required>
+    </p>
+    <p>
+      <label>Images</label>
+      <input class="w3-input" name="pictures" type="file" (change)="fileChangeEvent($event)" multiple base-sixty-four-input>
+    </p>
+    <p>
+      <label>Description</label>
+      <input [(ngModel)]="newBed.description" name="description" class="w3-input" type="text" required>
+    </p>
+    <p>
+      <label>Type</label>
+      <input [(ngModel)]="newBed.type" name="type" class="w3-input" type="text" required>
+    </p>
+    <p>
+      <label>Series</label>
+      <input [(ngModel)]="newBed.series" name="series" class="w3-input" type="text" required>
+    </p>
+    <p>
+      <label>Size</label>
+      <input [(ngModel)]="newBed.size"name="size" class="w3-input" type="text" required>
+    </p>
+    <p>
+      <label>Color</label>
+      <input [(ngModel)]="newBed.color" name="color" class="w3-input" type="text" required>
+    </p>
+    <p>
+      <label>Fabric</label>
+      <input [(ngModel)]="newBed.fabric" name="fabric" class="w3-input" type="text"required>
+    </p>
+    <p>
+      <label>Price</label>
+      <input [(ngModel)]="newBed.price" name="price" class="w3-input" type="text"required>
+    </p>
+    <p>
+      <button (click)="add()" class="w3-btn w3-green">Add new bed</button>
+    </p>
+    <img *ngIf="image" data-ng-src="image">
+  </form>
+</div>

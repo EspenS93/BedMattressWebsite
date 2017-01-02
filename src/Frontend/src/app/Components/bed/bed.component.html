@@ -2,6 +2,9 @@
   <h2>{{bed.name}} details!</h2>
   <div>
     <div>
+      <img *ngIf="pictures[0]" class="w3-image w3-round" style="width:100%;max-width:400px" [src]="pictures[0].image">
+    </div>
+    <div>
       <label>Description: </label>
       <label>{{bed.description}}</label>
     </div>
@@ -25,8 +28,12 @@
       <label>series: </label>
       <label>{{bed.series}}</label>
     </div>
+    <div>
+      <label>price: </label>
+      <label>{{bed.price}} Kr</label>
+    </div>
   </div>
 
   <button (click)="goBack()">Back</button>
-  <button (click)="save()">Save</button>
+  <button (click)="addToCart()">Add to cart</button>
 </div>

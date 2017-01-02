@@ -19,27 +19,36 @@ namespace BedMatressWebsite.Controllers
 
         public WebsiteDbContext BedMatressDB;
 
-        // GET: api/Picture/id
-        [HttpGet("{id}", Name = "GetPictures")]
+        // GET: api/Picture/all/id
+        [HttpGet("all/{id}", Name = "GetPictures")]
         public IEnumerable<Picture> GetPictures(string id)
         {
-            return BedMatressDB.Set<Picture>().Where(p => p.BedID == id);
+            return BedMatressDB.Pictures.Where(p => p.BedID == id);
+        }
+        // GET: api/Picture/id
+        [HttpGet("{id}", Name = "GetOnePicture")]
+        public IActionResult GetOnePicture(string id)
+        { var result =BedMatressDB.Pictures.First(p => p.BedID == id);
+            if(result==null){
+                return BadRequest();
+            }else{
+            return new JsonResult(result);
+            }
         }
 
         // POST: api/picture
         [HttpPost]
-        public IActionResult PostPictures([FromBody]Picture[] pictures)
+        public IActionResult PostPictures([FromBody]Picture picture)
         {
-            if (pictures == null)
+            if (picture == null)
             {
                 return BadRequest();
             }
-            for (int i = 0; i < pictures.Length; i++)
-            {
-                BedMatressDB.Pictures.Add(pictures[i]);
-            }
+            Console.Write(picture.Image);
+
+            BedMatressDB.Pictures.Add(picture);
             BedMatressDB.SaveChanges();
-            return Ok();
+            return CreatedAtRoute("GetOnePicture", new { id = picture.ID }, picture);
         }
 
         // PUT: api/picture/id

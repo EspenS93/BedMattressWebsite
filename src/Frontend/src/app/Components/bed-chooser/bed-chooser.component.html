@@ -3,7 +3,6 @@
   <div class=" w3-container w3-left w3-border w3-quarter">
 
 <p>Filter</p>
-
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w3-container">
 
   <div class="form-row">
@@ -53,9 +52,10 @@
 </form>
 </div>
 <div class=" w3-container w3-rest">
-  <div *ngFor="let bed of beds" [class.selected]="bed === selectedBed" (click)="gotoDetail()" on-mouseenter="onSelect(bed)" on-mouseleave="onSelect()"
+  
+  <div *ngFor="let bed of beds; let i of index" [class.selected]="bed === selectedBed" (click)="gotoDetail()" on-mouseenter="onSelect(bed)" on-mouseleave="onSelect()"
      class=" w3-card-4 w3-quarter w3-accordion w3-padding-large w3-margin">
-    <!-- <img /> -->
+    <!--<img [src]="getPicture(bed.id)"/>-->
     Here will be a picture of the bed
     <p>{{bed.name}}</p>
     <div class="w3-accordion-content w3-hide" [class.w3-show]="bed === selectedBed">
@@ -64,6 +64,7 @@
       <p>{{bed.fabric}}</p>
       <p>{{bed.size}}</p>
       <p>{{bed.series}}</p>
+      <p>{{bed.price}} Kr</p>
     </div>
 
   </div>

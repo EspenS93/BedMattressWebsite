@@ -7,4 +7,5 @@ export class Bed {
     size: string;
     color: string;
     fabric: string;
+    price: number;
 }

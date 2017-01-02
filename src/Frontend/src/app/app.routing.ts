@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router'
 import { FrontpageComponent } from './Components/frontpage/Frontpage.component';
 import { BedChooserComponent } from './Components/bed-chooser/bed-chooser.component';
 import { BedComponent } from './Components/bed/bed.component';
+import { NewBedComponent } from './Components/new-bed/new-bed.component';
 
 const appRoutes: Routes = [
     {
@@ -22,6 +23,10 @@ const appRoutes: Routes = [
     {
         path: 'webshop',
         component: BedChooserComponent
+    },
+    {
+        path: 'newBed',
+        component: NewBedComponent
     }
 ];
 

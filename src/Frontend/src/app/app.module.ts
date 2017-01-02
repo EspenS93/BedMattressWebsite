@@ -8,13 +8,15 @@ import { BedChooserComponent } from './Components/bed-chooser/bed-chooser.compon
 import { BedChooserService } from './Services/bed-chooser/bed-chooser.service';
 import { BedComponent } from './Components/bed/bed.component';
 import { FrontpageComponent } from './Components/frontpage/Frontpage.component';
+import { NewBedComponent } from './Components/new-bed/new-bed.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BedChooserComponent,
     BedComponent,
-    FrontpageComponent
+    FrontpageComponent,
+    NewBedComponent
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Bed } from '../../Models/bed';
+import { Picture } from '../../Models/picture';
 import { BedChooserService } from '../../Services/bed-chooser/bed-chooser.service';
+
 @Component({
   selector: 'app-bed-chooser',
   templateUrl: './bed-chooser.component.html',
@@ -17,6 +19,7 @@ export class BedChooserComponent implements OnInit {
   fabrics: String[];
   sizes: String[];
   series: String[];
+  pictures: Picture[] = [];
 
   form = this.fb.group({
     Color: [""],
@@ -32,10 +35,7 @@ export class BedChooserComponent implements OnInit {
     private route: ActivatedRoute,
     private bedChooserService: BedChooserService,
     private fb: FormBuilder
-  ) {
-  }
-
-
+  ) { }
 
   ngOnInit() {
     this.getBeds();
@@ -53,13 +53,17 @@ export class BedChooserComponent implements OnInit {
   gotoDetail(): void {
     this.router.navigate(['/bed/', this.selectedBed.id]);
   }
+  getPicture(id: string): string {
+    let picture: Picture = new Picture();
+    this.bedChooserService.getOnePicture(id).then(image => picture = image);
+    return picture.image;
+  }
 
   getBeds(): void {
     this.bedChooserService
       .getBeds()
       .then(beds => this.beds = beds);
   }
-
   getColors(): void {
     this.bedChooserService
       .getColors()
@@ -85,11 +89,9 @@ export class BedChooserComponent implements OnInit {
       .getSeries()
       .then(series => this.series = series);
   }
-
   onSubmit(): void {
-    this.bedChooserService.getSpecificBeds(this.form.value).then(beds => this.beds =beds);
+    this.bedChooserService.getSpecificBeds(this.form.value).then(beds => this.beds = beds);
   }
-
   deleteBed(bed: Bed): void {
     this.bedChooserService
       .deleteBed(bed.id)

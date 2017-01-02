@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Bed } from '../../Models/bed';
+import { Picture } from '../../Models/picture';
 import { BedChooserService } from '../../Services/bed-chooser/bed-chooser.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
@@ -12,15 +13,17 @@ import 'rxjs/add/operator/switchMap';
 })
 export class BedComponent implements OnInit {
   bed: Bed;
+  pictures: Picture[] =[];
 
   constructor(
-    private bedChooserServiceService: BedChooserService,
+    private bedChooserService: BedChooserService,
     private route: ActivatedRoute,
     private location: Location
   ) { 
     this.route.params.forEach((params: Params) => {
       let id: string = params['id']
-      this.bedChooserServiceService.getBed(id).then(bed => { this.bed = bed });
+      this.bedChooserService.getBed(id).then(bed => { this.bed = bed });
+      this.bedChooserService.getPictures(id).then(pictures => this.pictures=pictures);
     });
   }
 
@@ -31,9 +34,8 @@ export class BedComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-  save(): void {
-    this.bedChooserServiceService.updateBed(this.bed)
-      .then(() => this.goBack());
+  addToCart(): void {
+    //TODO: make a cart and add bed to cart with this method
   }
 
 }

@@ -75,19 +75,25 @@ export class BedChooserService {
   // ----------------------------------------------------------------------------------------
   // ----------------------------------------------------------------------------------------
   getPictures(id: string): Promise<Picture[]> {
-    return this.http.get('/api/picture/' + id)
+    return this.http.get('/api/picture/all/' + id)
       .toPromise()
       .then(response => response.json() as Picture[])
       .catch(this.handleError);
   }
+  getOnePicture(id: string): Promise<Picture> {
+    return this.http.get('/api/picture/' + id)
+      .toPromise()
+      .then(response => response.json() as Picture)
+      .catch(this.handleError);
+  }
 
-  addPictures(newPicture: Picture[]): Promise<Picture[]> {
+  addPicture(newPicture: Picture): Promise<Picture> {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('/api/picture', JSON.stringify(newPicture), { headers: headers })
       .toPromise()
-      .then(response => response.json() as Picture[])
-      .catch(this.handleError);;
+      .then(response => response.json() as Picture)
+      .catch(this.handleError);
   }
 
   deletePicture(id: string): Promise<void> {

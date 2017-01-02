@@ -1,9 +1,8 @@
 export class Picture {
     id: string;
     name: string;
-    description: string;
     contentType: string;
-    fileName: string;
-    file: string;
+    image: string;
     bedID: string;
+    
 }
