@@ -1,39 +1,42 @@
-<div *ngIf="bed">
-  <h2>{{bed.name}} details!</h2>
-  <div>
+<div *ngIf="bed" >
+  
+  <div class="w3-twothird">
     <div>
-      <img *ngIf="pictures[0]" class="w3-image w3-round" style="width:100%;max-width:400px" [src]="pictures[0].image">
+      <img *ngIf="pictures[0]" class="w3-image w3-round w3-border" [src]="pictures[0].image">
     </div>
-    <div>
+    <table class="w3-table w3-border">
+      <thead class="w3-teal">
+        <tr>
+          <th>Type </th>
+          <th>Color </th>
+          <th>Fabric </th>
+          <th>Size </th>
+          <th>Series </th>
+          <th>Price </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{bed.type}}</td>
+          <td>{{bed.color}}</td>
+          <td>{{bed.fabric}}</td>
+          <td>{{bed.size}}</td>
+          <td>{{bed.series}}</td>
+          <td>{{bed.price}} Kr</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="w3-third">
+    <h2 class="w3-teal">{{bed.name}} details!</h2>
+    <div class="w3-border w3-bordered">
       <label>Description: </label>
       <label>{{bed.description}}</label>
     </div>
-    <div>
-      <label>type: </label>
-      <label>{{bed.type}}</label>
-    </div>
-    <div>
-      <label>color: </label>
-      <label>{{bed.color}}</label>
-    </div>
-    <div>
-      <label>fabric: </label>
-      <label>{{bed.fabric}}</label>
-    </div>
-    <div>
-      <label>size: </label>
-      <label>{{bed.size}}</label>
-    </div>
-    <div>
-      <label>series: </label>
-      <label>{{bed.series}}</label>
-    </div>
-    <div>
-      <label>price: </label>
-      <label>{{bed.price}} Kr</label>
+    <div class="w3-margin">
+      <button (click)="goBack()">Back</button>
+      <button (click)="addToCart()">Add to cart</button>
     </div>
   </div>
-
-  <button (click)="goBack()">Back</button>
-  <button (click)="addToCart()">Add to cart</button>
 </div>
