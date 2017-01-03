@@ -1,5 +1,5 @@
-<div>
-  <div class="w3-container w3-green">
+<div class="w3-quarter">
+  <div class="w3-container w3-teal">
     <h2>New Bed</h2>
   </div>
   <form class="w3-container">
@@ -13,7 +13,7 @@
     </p>
     <p>
       <label>Description</label>
-      <input [(ngModel)]="newBed.description" name="description" class="w3-input" type="text" required>
+      <textarea [(ngModel)]="newBed.description" name="description" class="w3-input"></textarea>
     </p>
     <p>
       <label>Type</label>
@@ -25,7 +25,7 @@
     </p>
     <p>
       <label>Size</label>
-      <input [(ngModel)]="newBed.size"name="size" class="w3-input" type="text" required>
+      <input [(ngModel)]="newBed.size" name="size" class="w3-input" type="text" required>
     </p>
     <p>
       <label>Color</label>
@@ -33,15 +33,57 @@
     </p>
     <p>
       <label>Fabric</label>
-      <input [(ngModel)]="newBed.fabric" name="fabric" class="w3-input" type="text"required>
+      <input [(ngModel)]="newBed.fabric" name="fabric" class="w3-input" type="text" required>
     </p>
     <p>
       <label>Price</label>
-      <input [(ngModel)]="newBed.price" name="price" class="w3-input" type="text"required>
+      <input [(ngModel)]="newBed.price" name="price" class="w3-input" type="text" required>
     </p>
     <p>
-      <button (click)="add()" class="w3-btn w3-green">Add new bed</button>
+      <button (click)="add()" class="w3-btn w3-teal">Add new bed</button>
     </p>
     <img *ngIf="image" data-ng-src="image">
   </form>
+</div>
+<div class="w3-right w3-twothird w3-border w3-padding-large">
+  <h2> Preview</h2>
+  <div class="w3-twothird">
+    <div>
+      <img *ngIf="image[0]" class="w3-image w3-round w3-border" [src]="image[0]">
+    </div>
+    <table class="w3-table w3-border">
+      <thead class="w3-teal">
+        <tr>
+          <th>Type </th>
+          <th>Color </th>
+          <th>Fabric </th>
+          <th>Size </th>
+          <th>Series </th>
+          <th>Price </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{newBed.type}}</td>
+          <td>{{newBed.color}}</td>
+          <td>{{newBed.fabric}}</td>
+          <td>{{newBed.size}}</td>
+          <td>{{newBed.series}}</td>
+          <td>{{newBed.price}} Kr</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="w3-third">
+    <h2 class="w3-teal">{{newBed.name}} details!</h2>
+    <div class="w3-border w3-bordered">
+      <label>Description: </label>
+      <label>{{newBed.description}}</label>
+    </div>
+    <div class="w3-margin">
+      <button >Back</button>
+      <button >Add to cart</button>
+    </div>
+  </div>
 </div>

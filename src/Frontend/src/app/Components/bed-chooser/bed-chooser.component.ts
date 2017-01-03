@@ -55,7 +55,7 @@ export class BedChooserComponent implements OnInit {
   }
   getPicture(beds: Bed[]) {
     for (let i = 0; i < beds.length; i++) {
-      this.bedChooserService.getOnePicture(beds[i].id).then(image => this.pictures[i] = image);
+      this.bedChooserService.getOnePicture(beds[i].id).then(image => this.pictures[beds[i].id] = image);
     }
   }
 

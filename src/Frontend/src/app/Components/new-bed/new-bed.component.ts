@@ -4,6 +4,7 @@ import { UUID } from 'angular2-uuid';
 import { Bed } from '../../Models/bed';
 import { Picture } from '../../Models/picture';
 import { BedChooserService } from '../../Services/bed-chooser/bed-chooser.service';
+import { BedComponent } from '../bed/bed.component';
 
 @Component({
   selector: 'app-new-bed',
@@ -16,7 +17,7 @@ export class NewBedComponent implements OnInit {
   newPictures: Picture[];
   formdata: FormData = new FormData();
   files: FileList;
-  image: string[];
+  image: string[] =[];
   constructor(
     private bedChooserService: BedChooserService,
     private router: Router

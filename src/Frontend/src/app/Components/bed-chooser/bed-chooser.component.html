@@ -55,7 +55,7 @@
   
   <div *ngFor="let bed of beds; let i = index" [class.selected]="bed === selectedBed" (click)="gotoDetail()" on-mouseenter="onSelect(bed)" on-mouseleave="onSelect()"
      class=" w3-card-4 w3-quarter w3-accordion w3-padding-large w3-margin">
-    <img *ngIf="pictures[i]" class="w3-image w3-round" [src]="pictures[i].image"/>
+    <img *ngIf="pictures[bed.id]" class="w3-image w3-round" [src]="pictures[bed.id].image"/>
     <p>{{bed.name}}</p>
     <div class="w3-accordion-content w3-hide" [class.w3-show]="bed === selectedBed">
       <p>{{bed.color}}</p>
