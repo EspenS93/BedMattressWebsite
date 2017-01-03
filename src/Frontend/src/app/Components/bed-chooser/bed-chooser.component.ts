@@ -53,16 +53,16 @@ export class BedChooserComponent implements OnInit {
   gotoDetail(): void {
     this.router.navigate(['/bed/', this.selectedBed.id]);
   }
-  getPicture(id: string): string {
-    let picture: Picture = new Picture();
-    this.bedChooserService.getOnePicture(id).then(image => picture = image);
-    return picture.image;
+  getPicture(beds: Bed[]) {
+    for (let i = 0; i < beds.length; i++) {
+      this.bedChooserService.getOnePicture(beds[i].id).then(image => this.pictures[i] = image);
+    }
   }
 
   getBeds(): void {
     this.bedChooserService
       .getBeds()
-      .then(beds => this.beds = beds);
+      .then(beds => {this.beds = beds;this.getPicture(beds);} );
   }
   getColors(): void {
     this.bedChooserService
