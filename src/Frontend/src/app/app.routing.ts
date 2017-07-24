@@ -1,7 +1,7 @@
 import { ModuleWithProviders } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 
-import { FrontpageComponent } from './Components/frontpage/Frontpage.component';
+import { FrontpageComponent } from './Components/frontpage/frontpage.component';
 import { BedChooserComponent } from './Components/bed-chooser/bed-chooser.component';
 import { BedComponent } from './Components/bed/bed.component';
 import { NewBedComponent } from './Components/new-bed/new-bed.component';

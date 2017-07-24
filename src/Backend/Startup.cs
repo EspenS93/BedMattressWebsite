@@ -47,8 +47,6 @@ namespace BedMatressWebsite
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseApplicationInsightsRequestTelemetry();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -58,8 +56,6 @@ namespace BedMatressWebsite
             {
                 app.UseExceptionHandler("/Home/Error");
             }*/
-
-            app.UseApplicationInsightsExceptionTelemetry();
 
             app.Use(async (context, next) =>
             {

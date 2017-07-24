@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { BedChooserComponent } from './Components/bed-chooser/bed-chooser.component';
 import { BedChooserService } from './Services/bed-chooser/bed-chooser.service';
 import { BedComponent } from './Components/bed/bed.component';
-import { FrontpageComponent } from './Components/frontpage/Frontpage.component';
+import { FrontpageComponent } from './Components/frontpage/frontpage.component';
 import { NewBedComponent } from './Components/new-bed/new-bed.component';
 
 @NgModule({
