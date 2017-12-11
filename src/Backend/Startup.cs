@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.IdentityModel.Tokens.Jwt;
+
 
 namespace BedMatressWebsite
 {
@@ -21,11 +23,6 @@ namespace BedMatressWebsite
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
 
-            if (env.IsDevelopment())
-            {
-                // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
-                builder.AddApplicationInsightsSettings(developerMode: true);
-            }
             Configuration = builder.Build();
         }
 
@@ -35,10 +32,35 @@ namespace BedMatressWebsite
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddApplicationInsightsTelemetry(Configuration);
             var connection = @"Server=YOSHI\SQLEXPRESS;Database=BedMatressWebsite;Trusted_Connection=True;";
             services.AddDbContext<WebsiteDbContext>(options => options.UseSqlServer(connection));
             services.AddMvc();
+
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = "Cookies";
+                options.DefaultChallengeScheme = "oidc";
+            })
+            .AddCookie("Cookies")
+            .AddOpenIdConnect("oidc", options =>
+            {
+                options.SignInScheme = "Cookies";
+
+                options.Authority = "https://localhost:44334";
+                options.RequireHttpsMetadata = false;
+
+                options.ClientId = "mvc";
+                options.ClientSecret = "secret";
+                options.ResponseType = "code id_token";
+
+                options.SaveTokens = true;
+                options.GetClaimsFromUserInfoEndpoint = true;
+
+                options.Scope.Add("api1");
+                options.Scope.Add("offline_access");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,10 +74,10 @@ namespace BedMatressWebsite
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
             }
-            /*else
+            else
             {
                 app.UseExceptionHandler("/Home/Error");
-            }*/
+            }
 
             app.Use(async (context, next) =>
             {
@@ -69,7 +91,7 @@ namespace BedMatressWebsite
                     await next();
                 }
             });
-
+            //app.UseAuthentication();
             app.UseStaticFiles();
             app.UseMvc();
             

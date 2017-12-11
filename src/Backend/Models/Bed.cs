@@ -16,6 +16,5 @@ namespace BedMatressWebsite.Models
         public string Color { get; set; }
         public string Fabric { get; set; }
         public int Price { get; set; }
-
     }
 }

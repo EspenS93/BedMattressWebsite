@@ -12,7 +12,5 @@ namespace BedMatressWebsite.Models
         public string ContentType { get; set; }
         public string Image { get; set; }
         public string BedID { get; set; }
-
-
     }
 }
